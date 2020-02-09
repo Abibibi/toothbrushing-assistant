@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './picture.sass';
-import picture from 'src/styles/assets/toothbrush_toothpaste.jpg';
+import picture from 'src/styles/assets/brush.svg';
 
 
 const Picture = () => {
@@ -10,7 +10,7 @@ const Picture = () => {
             <img
                 className="picture-content"
                 src={picture}
-                alt="pattern of toothbrushes and toothpaste tubes"
+                alt="pattern of toothbrushes with toothpaste on"
             />
         </div>
     )

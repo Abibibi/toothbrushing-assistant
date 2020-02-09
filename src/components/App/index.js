@@ -6,7 +6,10 @@ import Picture from '../Picture';
 
 const App = () => {
   return (
-    <div>
+    <div id="app">
+      <div className="text">
+
+      </div>
       <Picture />
     </div>
   );
