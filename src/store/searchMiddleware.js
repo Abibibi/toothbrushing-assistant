@@ -12,7 +12,7 @@ const searchMiddleware = (store) => (next) => (action) => {
         {
           params: {
             part: 'snippet',
-            key: 'AIzaSyBf8v7IJjVLM9YLzIySEaBGnfl-hEBMvLM',
+            key: '',
             maxResults: 50,
             // to only get < 4 min videos
             videoDuration: 'short',
@@ -38,7 +38,7 @@ const searchMiddleware = (store) => (next) => (action) => {
               // Indeed, the exact duration of videos is needed:
               // only the videos that last a minimum of 3 minutes
               // should be kept
-              key: 'AIzaSyBf8v7IJjVLM9YLzIySEaBGnfl-hEBMvLM',
+              key: '',
               part: 'contentDetails',
               id: videosIds
             }
