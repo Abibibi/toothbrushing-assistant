@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 import './form.sass';
 
@@ -8,14 +9,24 @@ const Form = ({ search, inputModified }) => {
     inputModified(name, value);
   };
 
+  const labelClass = classNames({
+    'form-label': true,
+    'form-label-animation': search
+  });
+
+  const inputClass = classNames({
+    'form-element form-input': true,
+    'form-input-filled': search
+  });
+
   return (
     <form className="form">
       <div className="form-input-container">
-        <label htmlFor="search" className="form-label">Subject of interest</label>
+        <label htmlFor="search" className={labelClass}>Subject of interest</label>
         <input
           id="search"
           name="search"
-          className="form-element form-input"
+          className={inputClass}
           value={search}
           onChange={handleChange}
         />

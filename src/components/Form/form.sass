@@ -18,13 +18,42 @@
       color: gray
       font-size: .9rem
 
+      &-animation
+        font-size: .6em
+        text-transform: uppercase
+        color: #48195f
+        display: block
+        animation: label .5s
+        // with animation-fill-mode property,
+        // styles are kept as such one animation
+        // is done
+        animation-fill-mode: forwards
+
     &-element
-      padding: 0.4rem 0.6rem
       border-radius: .3rem
       border: none
 
     &-input
-      width: 100%   
+      width: 100%
+      padding: 0.4rem 0.6rem
+      
+      &-filled
+        padding: .6rem .6rem .2rem
 
     &-button
       margin-top: .2rem
+      padding: 0.4rem 0.6rem
+      background-color: #48195f
+      color: #ffffff
+      font-weight: 600
+
+      &:active
+        position: relative
+        top: .15rem
+
+@keyframes label
+  0%
+    transform: translateY(0)
+  100%
+    transform: translateY(-.5em)
+    color: #48195f
