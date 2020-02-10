@@ -2,10 +2,10 @@
 import { connect } from 'react-redux';
 
 // == Import : local
-import Example from 'src/components/Example';
+import Form from 'src/components/Form';
 
 // Action Creators
-import { doSomething } from 'src/store/reducer';
+import { inputChanged } from 'src/store/reducer';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -15,7 +15,7 @@ import { doSomething } from 'src/store/reducer';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = (state, ownProps) => ({
-  message: state.message,
+  search: state.search,
 });
 
 /* === Actions ===
@@ -26,23 +26,17 @@ const mapStateToProps = (state, ownProps) => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  doSomething: () => {
-    dispatch(doSomething('Coucou'));
+  inputModified: (name, value) => {
+    const action = inputChanged(name, value);
+    dispatch(action);
   },
 });
 
 // Container
-const ExampleContainer = connect(
+const FormContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Example);
+)(Form);
 
 // == Export
-export default ExampleContainer;
-
-/* = export à la volée
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Example);
-*/
+export default FormContainer;

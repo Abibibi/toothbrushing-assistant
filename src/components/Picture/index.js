@@ -6,7 +6,7 @@ import picture from 'src/styles/assets/brush.svg';
 
 const Picture = () => {
     return (
-        <div class="picture">
+        <div className="picture">
             <img
                 className="picture-content"
                 src={picture}

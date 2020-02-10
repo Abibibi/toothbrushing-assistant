@@ -1,15 +1,14 @@
 import React from 'react';
 
 import './app.sass';
-import Picture from '../Picture';
+import Picture from 'src/components/Picture';
+import Form from 'src/containers/Form';
 
 
 const App = () => {
   return (
     <div id="app">
-      <div className="text">
-
-      </div>
+      <Form />
       <Picture />
     </div>
   );

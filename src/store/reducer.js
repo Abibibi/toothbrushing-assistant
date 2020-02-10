@@ -1,18 +1,18 @@
 // == Initial State
 const initialState = {
-  message: 'Hello',
+  search: '',
 };
 
 // == Types
-const DO_SOMETHING = 'DO_SOMETHING';
+const INPUT_CHANGED = 'INPUT_CHANGED';
 
 // == Reducer
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case DO_SOMETHING:
+    case INPUT_CHANGED:
       return {
         ...state,
-        message: action.message,
+        [action.name]: action.value,
       };
 
     default:
@@ -21,9 +21,10 @@ const reducer = (state = initialState, action = {}) => {
 };
 
 // == Action Creators
-export const doSomething = message => ({
-  type: DO_SOMETHING,
-  message,
+export const inputChanged = (name, value) => ({
+  type: INPUT_CHANGED,
+  name,
+  value,
 });
 
 
