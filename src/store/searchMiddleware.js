@@ -13,7 +13,7 @@ const searchMiddleware = (store) => (next) => (action) => {
           params: {
             part: 'snippet',
             key: 'AIzaSyBf8v7IJjVLM9YLzIySEaBGnfl-hEBMvLM',
-            maxResults: 10,
+            maxResults: 50,
             // to only get < 4 min videos
             videoDuration: 'short',
             // type property is necessary when videoDuration property is used
@@ -22,7 +22,52 @@ const searchMiddleware = (store) => (next) => (action) => {
           }
         }
       )
-      .then((response) => console.log(response))
+      .then((response) => {
+        const videoList = response.data.items;
+  
+        // to only keep video ids as a string
+        const videosIds = videoList.map((video) => video.id.videoId).join();
+
+        axios.get(
+          'https://www.googleapis.com/youtube/v3/videos', 
+          {
+            params: {
+              // another ajax call
+              // to get more info on the videos caught
+              // with the first ajax call.
+              // Indeed, the exact duration of videos is needed:
+              // only the videos that last a minimum of 3 minutes
+              // should be kept
+              key: 'AIzaSyBf8v7IJjVLM9YLzIySEaBGnfl-hEBMvLM',
+              part: 'contentDetails',
+              id: videosIds
+            }
+          }
+        )
+        .then((response) => {
+          // to only get three-minute videos
+          const threeMinuteVideos = response.data.items.filter((video) => video.contentDetails.duration.includes('3M'));
+
+          // we need three-minute videos
+          // with the details provided by
+          // the first ajax call response
+          const threeMinuteVideosWithDetails = threeMinuteVideos.map((video) => 
+            videoList.find((anyVideo) => {
+              // adding duration property to each video
+              // we keep, to have confirmation in the state 
+              // that each video is indeed three minutes long
+              anyVideo.duration = video.contentDetails.duration
+              return anyVideo.id.videoId === video.id
+            })
+          );
+
+          const videoAction = videosCaught(threeMinuteVideosWithDetails);
+
+          // updating state with all three-minute videos
+          store.dispatch(videoAction);
+        })
+        .catch((error) => console.log(error))
+      })
       .catch((error) => console.log(error))
       .finally(() => {
         // to let FORM_SUBMITTED go to the reducer
