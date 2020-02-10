@@ -3,7 +3,11 @@ import classNames from 'classnames';
 
 import './form.sass';
 
-const Form = ({ search, inputModified }) => {
+const Form = ({
+  search,
+  inputModified,
+  searchDone
+}) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     inputModified(name, value);
@@ -19,8 +23,13 @@ const Form = ({ search, inputModified }) => {
     'form-input-filled': search
   });
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    searchDone();
+  }
+
   return (
-    <form className="form">
+    <form onSubmit={handleSubmit} className="form">
       <div className="form-input-container">
         <label htmlFor="search" className={labelClass}>Subject of interest</label>
         <input

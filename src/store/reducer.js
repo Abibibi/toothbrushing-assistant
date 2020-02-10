@@ -1,10 +1,13 @@
 // == Initial State
 const initialState = {
   search: '',
+  videos: []
 };
 
 // == Types
 const INPUT_CHANGED = 'INPUT_CHANGED';
+export const FORM_SUBMITTED = 'FORM_SUBMITTED';
+const VIDEOS_CAUGHT = 'VIDEOS_CAUGHT';
 
 // == Reducer
 const reducer = (state = initialState, action = {}) => {
@@ -14,7 +17,16 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         [action.name]: action.value,
       };
-
+    case VIDEOS_CAUGHT:
+      return {
+        ...state,
+        videos: action.videos
+      };
+    case FORM_SUBMITTED:
+      return {
+        ...state,
+        search: ''
+      };
     default:
       return state;
   }
@@ -27,6 +39,14 @@ export const inputChanged = (name, value) => ({
   value,
 });
 
+export const videosCaught = (videos) => ({
+  type: VIDEOS_CAUGHT,
+  videos
+});
+
+export const formSubmitted = () => ({
+  type: FORM_SUBMITTED
+});
 
 // == Selectors
 

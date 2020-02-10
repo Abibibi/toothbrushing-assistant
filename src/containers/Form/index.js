@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Form from 'src/components/Form';
 
 // Action Creators
-import { inputChanged } from 'src/store/reducer';
+import { inputChanged, formSubmitted } from 'src/store/reducer';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -30,6 +30,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     const action = inputChanged(name, value);
     dispatch(action);
   },
+
+  searchDone: () => {
+    const action = formSubmitted();
+    dispatch(action);
+  }
 });
 
 // Container
