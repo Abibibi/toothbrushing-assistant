@@ -8,9 +8,9 @@ const Picture = () => {
     return (
         <div className="picture">
             <img
-                className="picture-content"
-                src={picture}
-                alt="pattern of toothbrushes with toothpaste on"
+              className="picture-content"
+              src={picture}
+              alt="pattern of toothbrushes with toothpaste on"
             />
         </div>
     )
