@@ -5,6 +5,8 @@ import { FORM_SUBMITTED, videosCaught } from './reducer';
 const searchMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case FORM_SUBMITTED:
+      const API_KEY = process.env.REACT_APP_API_KEY;
+      console.log(API_KEY);
       const state = store.getState();
 
       axios.get(
@@ -12,7 +14,7 @@ const searchMiddleware = (store) => (next) => (action) => {
         {
           params: {
             part: 'snippet',
-            key: '',
+            key: process.env.REACT_APP_API_KEY,
             maxResults: 50,
             // to only get < 4 min videos
             videoDuration: 'short',
@@ -38,7 +40,7 @@ const searchMiddleware = (store) => (next) => (action) => {
               // Indeed, the exact duration of videos is needed:
               // only the videos that last a minimum of 3 minutes
               // should be kept
-              key: '',
+              key: process.env.REACT_APP_API_KEY,
               part: 'contentDetails',
               id: videosIds
             }
