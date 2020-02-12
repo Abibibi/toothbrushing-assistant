@@ -30,7 +30,7 @@ router.route('/getVideos/:search').get(async (req, res) => {
           params: {
             part: 'snippet',
             key: API_KEY,
-            maxResults: 50,
+            maxResults: 25,
             // to only get < 4 min videos
             videoDuration: 'short',
             // type property is necessary when videoDuration property is used
