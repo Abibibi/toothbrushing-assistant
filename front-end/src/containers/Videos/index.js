@@ -16,8 +16,7 @@ import { videos, videosLoaded } from 'src/store/reducer';
  */
 const mapStateToProps = (state, ownProps) => ({
   videos: state.videos,
-  currentSearch: state.currentSearch,
-  loading: state.loading
+  currentSearch: state.currentSearch
 });
 
 /* === Actions ===
@@ -28,8 +27,8 @@ const mapStateToProps = (state, ownProps) => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = (dispatch) => ({
-  videosReady: () => {
-    const action = videosLoaded();
+  videosReady: (videoId) => {
+    const action = videosLoaded(videoId);
     dispatch(action);
   }
 });

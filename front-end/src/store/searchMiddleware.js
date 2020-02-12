@@ -10,8 +10,17 @@ const searchMiddleware = (store) => (next) => (action) => {
       axios.get(`http://localhost:5000/videos/getVideos/${state.search}`)
       .then((response) => {
         console.log(response)
+
+        const videos = response.data.map((video) => {
+          // to make appear a loader per video
+          // once videos are fetched after ajax call
+          // (loader is supposed to disappear once 
+          // each video is fulled loaded)
+          video.loading = true;
+          return video
+        })
         
-        const videoAction = videosCaught(state.search, response.data);
+        const videoAction = videosCaught(state.search, videos);
         
         store.dispatch(videoAction);
       })

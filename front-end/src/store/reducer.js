@@ -2,7 +2,6 @@
 const initialState = {
   search: '',
   currentSearch: '',
-  loading: false,
   videos: []
 };
 
@@ -24,13 +23,17 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         currentSearch: action.currentSearch,
-        videos: action.videos,
-        loading: true
+        videos: action.videos
       };
     case VIDEOS_LOADED:
       return {
         ...state,
-        loading: false
+        videos: state.videos.map((video) => {
+          if (video.id.videoId === action.videoId) {
+            video.loading = false
+          }
+          return video;
+        })
       }
     case FORM_SUBMITTED:
       return {
@@ -55,8 +58,9 @@ export const videosCaught = (currentSearch, videos) => ({
   videos
 });
 
-export const videosLoaded = () => ({
-  type: VIDEOS_LOADED
+export const videosLoaded = (videoId) => ({
+  type: VIDEOS_LOADED,
+  videoId
 });
 
 export const formSubmitted = () => ({
