@@ -30,6 +30,8 @@ router.route('/getVideos/:search').get(async (req, res) => {
           params: {
             part: 'snippet',
             key: API_KEY,
+            // limiting number of results
+            // to avoid consuming too much
             maxResults: 15,
             // to only get < 4 min videos
             videoDuration: 'short',
