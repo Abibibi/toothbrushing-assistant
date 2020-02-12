@@ -1,6 +1,8 @@
 // == Initial State
 const initialState = {
   search: '',
+  currentSearch: '',
+  loading: false,
   videos: []
 };
 
@@ -8,6 +10,7 @@ const initialState = {
 const INPUT_CHANGED = 'INPUT_CHANGED';
 export const FORM_SUBMITTED = 'FORM_SUBMITTED';
 const VIDEOS_CAUGHT = 'VIDEOS_CAUGHT';
+const VIDEOS_LOADED = 'VIDEOS_LOADED';
 
 // == Reducer
 const reducer = (state = initialState, action = {}) => {
@@ -20,8 +23,15 @@ const reducer = (state = initialState, action = {}) => {
     case VIDEOS_CAUGHT:
       return {
         ...state,
-        videos: action.videos
+        currentSearch: action.currentSearch,
+        videos: action.videos,
+        loading: true
       };
+    case VIDEOS_LOADED:
+      return {
+        ...state,
+        loading: false
+      }
     case FORM_SUBMITTED:
       return {
         ...state,
@@ -39,9 +49,14 @@ export const inputChanged = (name, value) => ({
   value,
 });
 
-export const videosCaught = (videos) => ({
+export const videosCaught = (currentSearch, videos) => ({
   type: VIDEOS_CAUGHT,
+  currentSearch,
   videos
+});
+
+export const videosLoaded = () => ({
+  type: VIDEOS_LOADED
 });
 
 export const formSubmitted = () => ({

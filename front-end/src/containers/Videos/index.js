@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Videos from 'src/components/Videos';
 
 // Action Creators
-import { videos } from 'src/store/reducer';
+import { videos, videosLoaded } from 'src/store/reducer';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -16,6 +16,8 @@ import { videos } from 'src/store/reducer';
  */
 const mapStateToProps = (state, ownProps) => ({
   videos: state.videos,
+  currentSearch: state.currentSearch,
+  loading: state.loading
 });
 
 /* === Actions ===
@@ -25,7 +27,12 @@ const mapStateToProps = (state, ownProps) => ({
  *  - ownProps : les props passées au container
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
-const mapDispatchToProps = {};
+const mapDispatchToProps = (dispatch) => ({
+  videosReady: () => {
+    const action = videosLoaded();
+    dispatch(action);
+  }
+});
 
 // Container
 const VideosContainer = connect(
